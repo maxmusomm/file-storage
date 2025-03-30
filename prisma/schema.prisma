@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DB")
+  // url       = env("DATABASE_URL")
+  // directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id       Int      @id @default(autoincrement())
+  name     String   @db.VarChar(255)
+  password String   @db.VarChar(255)
+  files    File[]
+  folders  Folder[]
+}
+
+model File {
+  id       Int      @id @default(autoincrement())
+  filename String   @db.VarChar(255)
+  size     Int
+  mimeType String
+  uploaded DateTime @default(now())
+  user     User     @relation(fields: [userId], references: [id])
+  path     String
+  folder   Folder?  @relation(fields: [folderId], references: [id])
+  userId   Int
+  folderId Int?
+}
+
+model Folder {
+  id     Int    @id @default(autoincrement())
+  name   String @db.VarChar(255)
+  user   User   @relation(fields: [userId], references: [id])
+  files  File[]
+  userId Int
+}
+
+model Session {
+  id        String   @id @default(uuid()) // Generates a UUID for each session
+  sid       String   @unique
+  data      String
+  expiresAt DateTime
+}

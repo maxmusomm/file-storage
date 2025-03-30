@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%= title %>
+  </title>
+  <style>
+    .file {
+      display: flex;
+      flex-direction: column;
+      margin: 8px;
+      gap: 12px;
+      width: 220px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Welcome <%=username %>
+  </h1>
+  <form action="/users/<%= userId %>" method="post" enctype="multipart/form-data">
+    <div class="file">
+      <input type="file" name="avatar" multiple required max="3" />
+      <!-- <input type="text" name="avatar1name" id="avatar1name"> -->
+    </div>
+    <input type="submit" value="Upload" class="btn btn-default">
+  </form>
+  <form action="/users/<%= userId%>" method="post">
+    <h3>Create Folder</h3>
+    <input type="text" name="folder" id="folder" required>
+    <button type="submit">Create New Folder</button>
+  </form>
+  <form action="/users/<%= userId%>/logout?_method=delete" method="post">
+    <button type="submit">Logout</button>
+  </form>
+
+  <div class="storage" style="border: 1px solid red;">
+    <h2>Storage</h2>
+    <ul>
+      <% files.forEach((file)=> { %>
+        <li>
+          <div class="th">
+            <img style="height: 50px; width: 50px;" src="<%= file.path %>" alt="img">
+          </div>
+          <div class="bh"></div>
+        </li>
+        <% }); %>
+    </ul>
+  </div>
+</body>
+
+</html>
