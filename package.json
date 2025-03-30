@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start-node": "node --watch ./bin/www",
+    "lol": "node --watch ./bin/www",
     "dev": "nodemon --watch ./bin/www",
-    "start": "concurrently \"npx prisma generate\" \"node --watch ./bin/www\""
+    "start": "concurrently \"npx prisma generate\" \"nodemon --watch ./bin/www\""
   },
   "dependencies": {
     "@prisma/client": "^6.5.0",
