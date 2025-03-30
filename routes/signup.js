@@ -23,7 +23,7 @@ router.post('/', async (req, res) => {
     }
 
     // Check if user exists
-    const existingUser = await prisma.user.findFirst({
+    const existingUser = await prisma.user.findUnique({
       where: { name: name }
     });
     if (existingUser) {

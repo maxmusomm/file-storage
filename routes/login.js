@@ -10,9 +10,9 @@ router.get('/', function (req, res, next) {
   res.render('login');
 });
 
-router.post('/', async (req, res, next) => {
+router.post('/', async (req, res) => {
   const { name, password } = req.body;
-  console.log(req.body)
+  console.log(req.body.name)
   const user = await prisma.user.findFirst({
     where: {
       name: name,
